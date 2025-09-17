@@ -54,14 +54,14 @@ def iter_ids(path: str, batch_size: int = 10):
     if buf:
         yield buf
         
-def load_checkpoint_ids() -> set:
+def load_checkpoint_ids():
     if not CHECKPOINT_FILE.exists():
         return set()
     with open(CHECKPOINT_FILE, "r", encoding="utf-8") as f:
         return {row[0].strip() for row in csv.reader(f)
                 if row and row[0].strip() and row[0] != "id"}
 
-def append_checkpoint(pid: str, status: str, reason: str = ""):
+def append_checkpoint(pid, status, reason = ""):
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     write_header = not CHECKPOINT_FILE.exists()
     with open(CHECKPOINT_FILE, "a", encoding="utf-8", newline="") as f:
@@ -70,19 +70,19 @@ def append_checkpoint(pid: str, status: str, reason: str = ""):
             w.writerow(["id", "status", "reason"])
         w.writerow([pid, status, reason])
 
-def next_batch_index() -> int:
+def next_batch_index():
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     existing = sorted(OUT_DIR.glob("product_batch_*.json"))
     return len(existing) + 1
 
-def save_batch(items: list, idx: int):
+def save_batch(items, idx):
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     path = OUT_DIR / f"product_batch_{idx:05d}.json"
     with open(path, "w", encoding="utf-8") as f:
         json.dump(items, f, ensure_ascii=False, indent=2)
     print(f"[BATCH DONE] Saved {len(items)} items to {path}")
 
-def extract_item(data: dict):
+def extract_item(data):
     return {
         "id": data.get("id"),
         "name": data.get("name"),
