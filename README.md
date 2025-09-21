@@ -32,7 +32,7 @@ project2/
 
 # Cách chạy
 - Input đường dẫn file csv và các thông số khác ở config.py
-- Chạy file app.pypy
+- Chạy file app.py
 
 # Tự động chạy lại khi có sự cố bằng Supervisor
 Ở Terminal
