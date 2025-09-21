@@ -34,7 +34,7 @@ project2/
 - Input đường dẫn file csv và các thông số khác ở config.py
 - Chạy file app.pypy
 
-# Tự động chạy lại khi có sự cốcố bằng Supervisor
+# Tự động chạy lại khi có sự cố bằng Supervisor
 Ở Terminal
 
 Tạo file:
